@@ -1,15 +1,19 @@
 ### test connection
 GET http://localhost:8080/
 
-### test connection
-GET http://localhost:8080/albums
+### get all todos
+GET http://localhost:8080/todos
 
-### single album
-GET http://localhost:8080/albums/2
+### get single todo
+GET http://localhost:8080/todo/2
 
 
-### create a new user
-POST http://localhost:8080/albums
+### create a new todo
+POST http://localhost:8080/todo
 Content-Type: application/json
 
-{"id": "5","title": "The Modern Sound of Betty Carter","artist": "Betty Carter","price": 49.99}
+ {
+    "ID": "4",
+    "Todo": "Sit and relax.",
+    "Done": false
+}
