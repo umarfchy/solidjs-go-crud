@@ -5,7 +5,7 @@ GET http://localhost:8080/
 GET http://localhost:8080/todos
 
 ### get single todo
-GET http://localhost:8080/todo/2
+GET http://localhost:8080/todo/3
 
 
 ### create a new todo

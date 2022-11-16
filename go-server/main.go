@@ -23,8 +23,19 @@ func welcome(ctx *gin.Context) {
 	ctx.IndentedJSON(http.StatusOK, welcomeMessage)
 }
 
-func getTodos(ctx *gin.Context) {
+func getAllTodos(ctx *gin.Context) {
 	ctx.IndentedJSON(http.StatusOK, todoList)
+}
+
+func getTodoById(ctx *gin.Context) {
+	id := ctx.Param("id")
+	for _, todo := range todoList {
+		if todo.ID == id {
+			ctx.IndentedJSON(http.StatusOK, todo)
+			return
+		}
+	}
+	ctx.IndentedJSON(http.StatusNotFound, gin.H{"message": "todo not found"})
 }
 
 func addTodo(ctx *gin.Context) {
@@ -43,7 +54,8 @@ func main() {
 	// initializes gin router
 	router := gin.Default()
 	router.GET("/", welcome)
-	router.GET("/todos", getTodos)
+	router.GET("/todos", getAllTodos)
+	router.GET("/todo/:id", getTodoById)
 	router.POST("/todo", addTodo)
 	router.Run("localhost:8080")
 }
