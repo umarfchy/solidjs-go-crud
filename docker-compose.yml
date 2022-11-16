@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  solid-client:
+    container_name: "solid-client"
+    build: ./solid-client/.
+    ports:
+      - '3000:3000'
+    networks:
+      - mynetwork
+    volumes:
+      - './solid-client/:/home/'
+    depends_on:
+      - go-server
+      - mysql-db
+
+  go-server:
+    container_name: "go-server"
+    build: ./go-server/.
+    environment:
+      - PORT=5001
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USERNAME=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_TABLE=${MYSQL_TABLE}
+    ports:
+      - '5001:5001'
+    networks:
+      - mynetwork
+    depends_on:
+      - mysql-db
+
+
+  mysql-db:
+    container_name: "mysql-db"
+    build: ./db/.
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - '3306:3306'
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
