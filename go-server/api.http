@@ -1,0 +1,15 @@
+### test connection
+GET http://localhost:8080/
+
+### test connection
+GET http://localhost:8080/albums
+
+### single album
+GET http://localhost:8080/albums/2
+
+
+### create a new user
+POST http://localhost:8080/albums
+Content-Type: application/json
+
+{"id": "5","title": "The Modern Sound of Betty Carter","artist": "Betty Carter","price": 49.99}
